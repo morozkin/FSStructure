@@ -1,5 +1,6 @@
 package com.morozkin.fsstructure
 
+import com.intellij.openapi.components.service
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
@@ -12,7 +13,7 @@ import org.jetbrains.jewel.bridge.addComposeTab
 class ToolWindowFactory : ToolWindowFactory, DumbAware {
   override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
     toolWindow.addComposeTab("Files List") {
-      FilesList(viewModel = FilesListViewModel())
+      FilesList(viewModel = service<FilesListViewModel>())
     }
   }
 }
