@@ -1,6 +1,5 @@
 package com.morozkin.fsstructure.ui
 
-import androidx.compose.foundation.HorizontalScrollbar
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
