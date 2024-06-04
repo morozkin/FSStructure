@@ -1,9 +1,7 @@
 package com.morozkin.fsstructure.ui
 
 import androidx.compose.foundation.HorizontalScrollbar
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
@@ -23,7 +21,9 @@ import org.jetbrains.jewel.ui.component.Typography
 fun SelectedFilesInfoBar(viewModel: SelectedFilesInfoBarViewModel) {
   val state = viewModel.selectedFilesInfoBarState.collectAsState()
 
-  Box {
+  Box(
+    modifier = Modifier.height(28.dp)
+  ) {
     Divider(orientation = Orientation.Horizontal)
 
     when (val currentState = state.value) {
@@ -43,11 +43,14 @@ private fun FilePathBreadcrumbBar(pathComponents: List<String>) {
   val lazyListState = rememberLazyListState()
 
   Box(
+    modifier = Modifier.fillMaxSize(),
     contentAlignment = Alignment.BottomStart
   ) {
     LazyRow(
+      modifier = Modifier.fillMaxHeight(),
       state = lazyListState,
-      contentPadding = PaddingValues(start = 8.dp, top = 8.dp, end = 8.dp, bottom = 8.dp),
+      contentPadding = PaddingValues(start = 12.dp, end = 12.dp),
+      verticalAlignment = Alignment.CenterVertically
     ) {
       pathComponents.forEachIndexed { index, pathComponent ->
         item(key = "$pathComponent$index") {
@@ -58,6 +61,7 @@ private fun FilePathBreadcrumbBar(pathComponents: List<String>) {
         }
       }
     }
+
     HorizontalScrollbar(
       adapter = rememberScrollbarAdapter(lazyListState)
     )
@@ -67,7 +71,10 @@ private fun FilePathBreadcrumbBar(pathComponents: List<String>) {
 @Composable
 private fun InfoBar(text: String) {
   Box(
-    modifier = Modifier.padding(start = 8.dp, top = 8.dp, end = 8.dp, bottom = 8.dp),
+    modifier = Modifier
+      .fillMaxSize()
+      .padding(start = 12.dp, end = 12.dp),
+    contentAlignment = Alignment.CenterStart
   ) {
     Text(text = text, style = Typography.labelTextStyle())
   }
