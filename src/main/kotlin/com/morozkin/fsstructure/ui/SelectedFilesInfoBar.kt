@@ -50,7 +50,7 @@ private fun FilePathBreadcrumbBar(pathComponents: List<String>) {
       contentPadding = PaddingValues(start = 8.dp, top = 8.dp, end = 8.dp, bottom = 8.dp),
     ) {
       pathComponents.forEachIndexed { index, pathComponent ->
-        item(key = pathComponent) {
+        item(key = "$pathComponent$index") {
           Text(text = pathComponent, style = Typography.labelTextStyle())
           if (index != pathComponents.count() - 1) {
             IntelliJIcon(IntelliJIcons.Breadcrumb)
@@ -58,7 +58,6 @@ private fun FilePathBreadcrumbBar(pathComponents: List<String>) {
         }
       }
     }
-
     HorizontalScrollbar(
       adapter = rememberScrollbarAdapter(lazyListState)
     )
