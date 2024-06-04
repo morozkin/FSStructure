@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.morozkin.fsstructure.viewModel.SelectedFilesInfoBarState
 import com.morozkin.fsstructure.viewModel.SelectedFilesInfoBarViewModel
+import org.jetbrains.jewel.ui.Orientation
+import org.jetbrains.jewel.ui.component.Divider
 import org.jetbrains.jewel.ui.component.Text
 import org.jetbrains.jewel.ui.component.Typography
 
@@ -21,13 +23,17 @@ import org.jetbrains.jewel.ui.component.Typography
 fun SelectedFilesInfoBar(viewModel: SelectedFilesInfoBarViewModel) {
   val state = viewModel.selectedFilesInfoBarState.collectAsState()
 
-  when (val currentState = state.value) {
-    is SelectedFilesInfoBarState.File -> {
-      FilePathBreadcrumbBar(currentState.pathComponents)
-    }
+  Box {
+    Divider(orientation = Orientation.Horizontal)
 
-    is SelectedFilesInfoBarState.Files -> {
-      InfoBar(currentState.info)
+    when (val currentState = state.value) {
+      is SelectedFilesInfoBarState.File -> {
+        FilePathBreadcrumbBar(currentState.pathComponents)
+      }
+
+      is SelectedFilesInfoBarState.Files -> {
+        InfoBar(currentState.info)
+      }
     }
   }
 }
@@ -41,7 +47,7 @@ private fun FilePathBreadcrumbBar(pathComponents: List<String>) {
   ) {
     LazyRow(
       state = lazyListState,
-      contentPadding = PaddingValues(start = 8.dp, end = 8.dp, bottom = 8.dp),
+      contentPadding = PaddingValues(start = 8.dp, top = 8.dp, end = 8.dp, bottom = 8.dp),
     ) {
       pathComponents.forEachIndexed { index, pathComponent ->
         item(key = pathComponent) {
@@ -62,7 +68,7 @@ private fun FilePathBreadcrumbBar(pathComponents: List<String>) {
 @Composable
 private fun InfoBar(text: String) {
   Box(
-    modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp),
+    modifier = Modifier.padding(start = 8.dp, top = 8.dp, end = 8.dp, bottom = 8.dp),
   ) {
     Text(text = text, style = Typography.labelTextStyle())
   }
