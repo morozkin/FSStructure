@@ -5,7 +5,9 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.v2.ScrollbarAdapter
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import org.jetbrains.jewel.foundation.theme.JewelTheme
 import org.jetbrains.jewel.ui.component.styling.ScrollbarStyle
@@ -29,14 +31,14 @@ fun HorizontalScrollbar(
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   style: ScrollbarStyle = JewelTheme.scrollbarStyle,
 ) {
-  val shape by remember { mutableStateOf(RoundedCornerShape(style.metrics.thumbCornerSize)) }
-  val hoverDurationMillis by remember { mutableStateOf(style.hoverDuration.inWholeMilliseconds) }
+  val shape = remember(style.metrics.thumbCornerSize) { RoundedCornerShape(style.metrics.thumbCornerSize) }
+  val hoverDurationMillis = remember(style.hoverDuration) { style.hoverDuration.inWholeMilliseconds.toInt() }
 
   val composeScrollbarStyle = androidx.compose.foundation.ScrollbarStyle(
     minimalHeight = style.metrics.minThumbLength,
     thickness = style.metrics.thumbThickness,
     shape = shape,
-    hoverDurationMillis = hoverDurationMillis.toInt(),
+    hoverDurationMillis = hoverDurationMillis,
     unhoverColor = style.colors.thumbBackground,
     hoverColor = style.colors.thumbBackgroundHovered,
   )
