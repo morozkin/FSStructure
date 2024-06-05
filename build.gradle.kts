@@ -1,8 +1,7 @@
 plugins {
-//    id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.8.21"
-    id("org.jetbrains.intellij") version "1.17.3"
-    id("org.jetbrains.compose") version "1.6.10-dev1584"
+    alias(libs.plugins.kotlin) // Kotlin support
+    alias(libs.plugins.gradleIntelliJPlugin) // Gradle IntelliJ Plugin
+    alias(libs.plugins.compose) // Compose Desktop
 }
 
 group = "com.morozkin"
