@@ -52,7 +52,7 @@ sealed class FileSystemElement {
 }
 
 @Stable
-@Service
+@Service(Service.Level.PROJECT)
 class FilesListViewModel(
   private val coroutineScope: CoroutineScope
 ) : SelectedFilesInfoBarViewModel {

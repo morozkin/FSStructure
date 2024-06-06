@@ -13,7 +13,7 @@ import org.jetbrains.jewel.bridge.addComposeTab
 class ToolWindowFactory : ToolWindowFactory, DumbAware {
   override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
     toolWindow.addComposeTab("Files List") {
-      FilesList(viewModel = service<FilesListViewModel>())
+      FilesList(viewModel = project.service<FilesListViewModel>())
     }
   }
 }
