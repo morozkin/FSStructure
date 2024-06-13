@@ -92,12 +92,12 @@ fun FilesList(viewModel: FilesListViewModel) {
                 Row(
                   verticalAlignment = Alignment.CenterVertically
                 ) {
-                  Text(text = element.name, style = Typography.labelTextStyle())
+                  Text(text = element.name, style = Typography.labelTextStyle(), softWrap = false)
                   Spacer(Modifier.width(8.dp))
-                  Text(text = element.attributes!!, style = Typography.medium())
+                  Text(text = element.attributes!!, style = Typography.medium(), softWrap = false)
                 }
               } else {
-                Text(text = element.name, style = Typography.labelTextStyle())
+                Text(text = element.name, style = Typography.labelTextStyle(), softWrap = false)
               }
             }
           }
