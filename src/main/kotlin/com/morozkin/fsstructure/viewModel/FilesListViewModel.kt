@@ -6,6 +6,7 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.util.containers.isEmpty
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
@@ -93,7 +94,7 @@ class FilesListViewModel(
   }
 
   init {
-    coroutineScope.launch {
+    coroutineScope.launch(Dispatchers.IO) {
       val fs = FileSystems.getDefault()
 
       val roots = mutableListOf<FileSystemTree.Element>()
@@ -144,7 +145,7 @@ class FilesListViewModel(
   }
 
   fun handleOpenedElements(elementsPathStings: List<String>) {
-    coroutineScope.launch {
+    coroutineScope.launch(Dispatchers.IO) {
       updateTree { tree ->
         val elementsToOpen = elementsPathStings
           .mapNotNull {
